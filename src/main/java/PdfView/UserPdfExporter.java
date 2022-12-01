@@ -18,12 +18,13 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import PdfView.entities.Log;
 import PdfView.entities.Person;
 public class UserPdfExporter {
-	private List<Person> listPersons;
+	private List<Log> listPersons;
 	private int rows;
 
-	public UserPdfExporter(List<Person> listPersons,int rows) {
+	public UserPdfExporter(List<Log> listPersons,int rows) {
 		super();
 		this.listPersons = listPersons;
 		this.rows=rows;
@@ -36,21 +37,34 @@ public class UserPdfExporter {
 		com.itextpdf.text.Font font=FontFactory.getFont(FontFactory.HELVETICA);
 		font.setColor(BaseColor.WHITE);
 		
-		cell.setPhrase(new Phrase("Person ID", font));
+		cell.setPhrase(new Phrase("Id", font));
+        
+        table.addCell(cell);
+		
+		cell.setPhrase(new Phrase("VarName", font));
         
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("Person Name", font));
+        cell.setPhrase(new Phrase("TimeString", font));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("Person City", font));
+        cell.setPhrase(new Phrase("Time_ms", font));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("Validity", font));
+        table.addCell(cell);
+        
+        cell.setPhrase(new Phrase("VarValue", font));
         table.addCell(cell);
 	}
 	public void writeTableData(PdfPTable table) {
-		for(Person p:listPersons) {
-		    table.addCell(String.valueOf(p.getId()));
-            table.addCell(p.getpName());
-            table.addCell(p.getpCity());
+		for(Log p:listPersons) {
+			table.addCell(String.valueOf(p.getId()));
+		    table.addCell(p.getVarName());
+            table.addCell(p.getTimeString());
+            table.addCell(String.valueOf(p.getTime_ms()));
+            table.addCell(String.valueOf(p.getValidity()));
+            table.addCell(String.valueOf(p.getVarValue()));
 		}
 	}
 	public void export(HttpServletResponse response) throws DocumentException,IOException {
