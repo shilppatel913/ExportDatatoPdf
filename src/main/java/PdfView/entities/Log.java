@@ -1,5 +1,6 @@
 package PdfView.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,11 +13,16 @@ public class Log {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String VarName;
-	private String TimeString;
-	private float VarValue;
-	private int Validity;
-	private float Time_ms;
+	@Column(name = "var_name")
+	private String varName;
+	@Column(name = "time_string")
+	private String timeString;
+	@Column(name = "var_value")
+	private float varValue;
+	@Column(name = "validity")
+	private int validity;
+	@Column(name = "time_ms")
+	private double timems;
 	
 	public int getId() {
 		return id;
@@ -25,42 +31,42 @@ public class Log {
 		this.id = id;
 	}
 	public String getVarName() {
-		return VarName;
+		return varName;
 	}
 	public void setVarName(String varName) {
-		VarName = varName;
+		this.varName = varName;
 	}
 	public String getTimeString() {
-		return TimeString;
+		return timeString;
 	}
 	public void setTimeString(String timeString) {
-		TimeString = timeString;
+		this.timeString = timeString;
 	}
 	public float getVarValue() {
-		return VarValue;
+		return varValue;
 	}
 	public void setVarValue(float varValue) {
-		VarValue = varValue;
+		this.varValue = varValue;
 	}
 	public int getValidity() {
-		return Validity;
+		return validity;
 	}
 	public void setValidity(int validity) {
-		Validity = validity;
+		this.validity = validity;
 	}
-	public float getTime_ms() {
-		return Time_ms;
+	public double getTime_ms() {
+		return timems;
 	}
-	public void setTime_ms(float time_ms) {
-		Time_ms = time_ms;
+	public void setTime_ms(double time_ms) {
+		this.timems = time_ms;
 	}
-	public Log(String varName, String timeString, float varValue, int validity, float time_ms) {
+	public Log(String varName, String timeString, float varValue, int validity, double time_ms) {
 		super();
-		VarName = varName;
-		TimeString = timeString;
-		VarValue = varValue;
-		Validity = validity;
-		Time_ms = time_ms;
+		this.varName = varName;
+		this.timeString = timeString;
+		this.varValue = varValue;
+		this.validity = validity;
+		this.timems = time_ms;
 	}
 	public Log() {
 		super();
